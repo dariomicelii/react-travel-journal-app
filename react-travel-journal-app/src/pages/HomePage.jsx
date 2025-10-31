@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
 const HomePage = () => {
+  const { id } = useParams();
   const [trips, setTrips] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -40,10 +42,10 @@ const HomePage = () => {
                 <h5 className="card-title">{trip.destination}</h5>
                 <p className="card-text flex-grow-1">{trip.notes}</p>
                 <Link
-                  to={`/trips/${trip.id}`}
+                  to={`/details/${trip.id}`}
                   className="btn btn-primary mt-auto"
                 >
-                  Go somewhere
+                  Vedi i dettagli
                 </Link>
               </div>
             </div>

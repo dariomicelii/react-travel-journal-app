@@ -77,6 +77,11 @@ const HomePage = () => {
                   I tuoi viaggi
                 </a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/map">
+                  Mappa
+                </a>
+              </li>
             </ul>
           </div>
         </div>

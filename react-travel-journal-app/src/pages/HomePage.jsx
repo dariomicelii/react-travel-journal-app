@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom"; // ✅ Import necessario
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const [trips, setTrips] = useState([]);
@@ -27,7 +27,11 @@ const HomePage = () => {
       (trip.notes && trip.notes.toLowerCase().includes(search.toLowerCase()))
   );
 
-  // Trasforma il rating in stelline
+  // 🔥 Mostra solo i primi 6 viaggi se non stai cercando
+  const tripsToShow =
+    search.trim() === "" ? filteredTrips.slice(0, 6) : filteredTrips;
+
+  // Funzione per trasformare rating in stelline
   const getStars = (value) => {
     if (!value || typeof value !== "string") return "Nessuna valutazione";
 
@@ -52,7 +56,7 @@ const HomePage = () => {
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
           <a class="navbar-brand" href="/">
-            Navbar
+            TravelJournal
           </a>
           <button
             class="navbar-toggler"
@@ -86,6 +90,7 @@ const HomePage = () => {
           </div>
         </div>
       </nav>
+
       <div className="container my-5">
         {/* Hero section */}
         <div className="text-center mb-5">
@@ -109,8 +114,8 @@ const HomePage = () => {
           <div>Caricamento...</div>
         ) : (
           <div className="row g-4">
-            {filteredTrips.length > 0 ? (
-              filteredTrips.map((trip) => (
+            {tripsToShow.length > 0 ? (
+              tripsToShow.map((trip) => (
                 <div key={trip.id} className="col-md-4">
                   <Link
                     to={`/details/${trip.id}`}
@@ -131,7 +136,7 @@ const HomePage = () => {
                         <p>
                           <strong>Valutazione:</strong> {getStars(trip.rating)}
                         </p>
-                        {/* Link dettagli */}
+
                         <Link
                           to={`/details/${trip.id}`}
                           className="btn btn-primary mt-auto"

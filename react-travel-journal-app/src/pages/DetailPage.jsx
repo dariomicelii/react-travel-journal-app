@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import PhotoAlbum from "../components/PhotoAlbum";
 
 const DetailPage = () => {
   const { id } = useParams();
@@ -51,7 +52,7 @@ const DetailPage = () => {
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
           <a class="navbar-brand" href="/">
-            Navbar
+            TravelJournal
           </a>
           <button
             class="navbar-toggler"
@@ -135,6 +136,10 @@ const DetailPage = () => {
             </div>
           </div>
         </div>
+        {/* Photo Album Section */}
+        {trip.photos && trip.photos.length > 0 && (
+          <PhotoAlbum photos={trip.photos} />
+        )}
       </div>
     </>
   );
